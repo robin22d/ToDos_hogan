@@ -14,19 +14,22 @@ var api = require('./routes/api');
 
 var app = express();
 
-//After localhost is the name of your database
-var dbUrl = 'mongodb://localhost/toDoDB';
+//the name of the database after the /
+var dbUrl = 'mongodb://localhost:27017/toDoDB'
 
 //Create connection to mongodb server
-mongoose.connect(dbUrl, function (err) {
-   if(err){
-       console.log('Not connected to mongoose:', err);
-   }else{
-       console.log('Connected to mongoose:', dbUrl);
-   }
+mongoose.connect(dbUrl,{
+  useMongoClient: true
 });
-
-
+//On successful connection
+mongoose.connection.on('connected', () => {
+  console.log("Connected to database ", config.database);
+});
+//Error created when connecting
+mongoose.connection.on('error', (Error) => {
+  console.log("Database error ", Error);
+});
+ 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');

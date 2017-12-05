@@ -44,6 +44,26 @@ router.post('/:resource', function (req,res) {
     }
 });
 
+router.get('/:resource/:id', function (req,res) {
+    var resource = req.params.resource;
+    var id = req.params.id;
+
+    if(resource == 'toDos'){
+        ToDosController.findById(id, function (err, results) {
+            if(err){
+                res.json({
+                    confirmation: 'fail',
+                    message: 'Not Found'
+                });
+                return
+            }
+            res.json({
+                confirmation:'success',
+                result: results
+            })
+        });
+    }
+});
 
 
 module.exports = router;

@@ -23,7 +23,7 @@ mongoose.connect(dbUrl,{
 });
 //On successful connection
 mongoose.connection.on('connected', () => {
-  console.log("Connected to database ", config.database);
+  console.log("Connected to database ", dbUrl);
 });
 //Error created when connecting
 mongoose.connection.on('error', (Error) => {

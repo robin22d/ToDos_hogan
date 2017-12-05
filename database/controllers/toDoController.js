@@ -23,6 +23,15 @@ module.exports = {
             callback(null, todo);
         });
     },
+    findById: function(id, callback){
+        toDos.findById(id, function(err, todo){
+            if(err){
+                callback(err, null);
+                return
+            }
+            callback(null, todo);
+        });
+},
 
 };
 
